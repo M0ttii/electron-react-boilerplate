@@ -22,6 +22,11 @@ const electronHandler = {
       ipcRenderer.once(channel, (_event, ...args) => func(...args));
     },
   },
+  desktopCapturer: {
+    getSources: async (options: { types: string[], thumbnailSize: { width: number, height: number } }) => {
+      return await ipcRenderer.invoke('DESKTOP_CAPTURER_GET_SOURCES', options);
+    }
+  }
 };
 
 contextBridge.exposeInMainWorld('electron', electronHandler);
